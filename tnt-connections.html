@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TNT Connections | Telecom Networking Technologies</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a5f7a;
+            --primary-dark: #134b5f;
+            --dark: #222;
+            --gray: #666;
+            --light-gray: #f5f5f5;
+            --white: #fff;
+            --border: #ddd;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Source Sans 3', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--white);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--dark);
+        }
+
+        .logo-img {
+            height: 48px;
+            width: auto;
+            /* 
+               TO ADD YOUR LOGO:
+               Save your logo as "logo.png" in the same folder as this HTML file
+            */
+        }
+
+        .logo-fallback {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .logo-box {
+            background: var(--primary);
+            color: var(--white);
+            font-weight: 700;
+            padding: 0.5rem 0.75rem;
+            font-size: 1rem;
+        }
+
+        .logo-text {
+            line-height: 1.2;
+        }
+
+        .logo-text strong {
+            display: block;
+            font-size: 1.1rem;
+        }
+
+        .logo-text span {
+            font-size: 0.75rem;
+            color: var(--gray);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-cta {
+            background: var(--primary);
+            color: var(--white) !important;
+            padding: 0.6rem 1.25rem;
+        }
+
+        .nav-cta:hover {
+            background: var(--primary-dark);
+            color: var(--white) !important;
+        }
+
+        .mobile-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 4px;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .mobile-toggle span {
+            width: 22px;
+            height: 2px;
+            background: var(--dark);
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(rgba(20, 40, 55, 0.85), rgba(20, 40, 55, 0.9)), 
+                        url('server-rack.jpg') center/cover no-repeat;
+            /* 
+               TO ADD YOUR IMAGE:
+               1. Save a server rack image as "server-rack.jpg" in the same folder as this HTML file
+               2. Or replace 'server-rack.jpg' above with your image filename
+               
+               Good free images at:
+               - unsplash.com/s/photos/server-rack
+               - pexels.com/search/server%20rack/
+            */
+            padding: 5rem 2rem;
+            color: var(--white);
+        }
+
+        .hero-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .hero h1 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            color: var(--white);
+        }
+
+        .hero p {
+            color: rgba(255,255,255,0.85);
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+        }
+
+        .btn-outline {
+            border: 2px solid var(--white);
+            color: var(--white);
+            background: transparent;
+        }
+
+        .btn-outline:hover {
+            background: var(--white);
+            color: var(--primary);
+        }
+
+        .hero-image {
+            background: rgba(255,255,255,0.95);
+            border: none;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+
+        .hero-services {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            text-align: left;
+        }
+
+        .hero-service-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.95rem;
+            color: var(--dark);
+        }
+
+        .hero-service-item svg {
+            width: 18px;
+            height: 18px;
+            stroke: var(--primary);
+            flex-shrink: 0;
+        }
+
+        /* Services */
+        .services {
+            padding: 4rem 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            font-size: 1.75rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-header p {
+            color: var(--gray);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .service-card {
+            border: 1px solid var(--border);
+            padding: 1.5rem;
+            background: var(--white);
+        }
+
+        .service-card svg {
+            width: 32px;
+            height: 32px;
+            stroke: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .service-card p {
+            color: var(--gray);
+            font-size: 0.95rem;
+        }
+
+        /* About */
+        .about {
+            background-color: var(--light-gray);
+            background-image: linear-gradient(rgba(245, 245, 245, 0.85), rgba(245, 245, 245, 0.92)), 
+                              url('cabling-work.jpg');
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            /* 
+               TO ADD YOUR IMAGE:
+               Save a cabling/fiber work image as "cabling-work.jpg" in the same folder
+               Good search terms: "network cabling", "fiber optic cable", "ethernet installation"
+            */
+            padding: 4rem 2rem;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .about-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about h2 {
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .about p {
+            color: var(--gray);
+            margin-bottom: 1rem;
+        }
+
+        .about-list {
+            list-style: none;
+            margin-top: 1.5rem;
+        }
+
+        .about-list li {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .about-list svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--primary);
+            flex-shrink: 0;
+        }
+
+        .about-highlights {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .highlight-box {
+            background: var(--white);
+            border: 1px solid var(--border);
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .highlight-box strong {
+            display: block;
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .highlight-box span {
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        /* Contact */
+        .contact {
+            padding: 4rem 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .contact-info h2 {
+            font-size: 1.75rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-info > p {
+            color: var(--gray);
+            margin-bottom: 2rem;
+        }
+
+        .contact-method {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-method svg {
+            width: 24px;
+            height: 24px;
+            stroke: var(--primary);
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .contact-method strong {
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        .contact-method a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .contact-method a:hover {
+            text-decoration: underline;
+        }
+
+        .contact-form {
+            background: var(--light-gray);
+            border: 1px solid var(--border);
+            padding: 2rem;
+        }
+
+        .contact-form h3 {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.35rem;
+            font-size: 0.95rem;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border);
+            font-family: inherit;
+            font-size: 1rem;
+            background: var(--white);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .submit-btn {
+            background: var(--primary);
+            color: var(--white);
+            border: none;
+            padding: 0.75rem 2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: inherit;
+            margin-top: 0.5rem;
+        }
+
+        .submit-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: var(--white);
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            display: inline-flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .footer-logo-img {
+            height: 40px;
+            width: auto;
+        }
+
+        .footer-fallback {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .footer-fallback .logo-box {
+            background: var(--primary);
+        }
+
+        .footer-logo span {
+            font-weight: 600;
+        }
+
+        footer p {
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        /* Mobile */
+        .mobile-menu {
+            display: none;
+            background: var(--white);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 2rem;
+        }
+
+        .mobile-menu.active {
+            display: block;
+        }
+
+        .mobile-menu ul {
+            list-style: none;
+        }
+
+        .mobile-menu li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .mobile-menu li:last-child {
+            border-bottom: none;
+        }
+
+        .mobile-menu a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        @media (max-width: 900px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-toggle {
+                display: flex;
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-image {
+                order: -1;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .hero {
+                padding: 2.5rem 1.5rem;
+            }
+
+            .hero h1 {
+                font-size: 1.75rem;
+            }
+
+            .services,
+            .contact {
+                padding: 3rem 1.5rem;
+            }
+
+            .about {
+                padding: 3rem 1.5rem;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-services {
+                grid-template-columns: 1fr;
+            }
+
+            .about-highlights {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <img src="logo.png" alt="TNT Connections - Telecom Networking Technologies" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="logo-fallback" style="display:none;">
+                    <div class="logo-box">TNT</div>
+                    <div class="logo-text">
+                        <strong>TNT Connections</strong>
+                        <span>Telecom Networking Technologies</span>
+                    </div>
+                </div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#services">Services</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#contact" class="nav-cta">Get a Quote</a></li>
+            </ul>
+            <div class="mobile-toggle" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <ul>
+            <li><a href="#services" onclick="toggleMenu()">Services</a></li>
+            <li><a href="#about" onclick="toggleMenu()">About</a></li>
+            <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
+        </ul>
+    </div>
+
+    <section class="hero">
+        <div class="hero-content">
+            <div>
+                <h1>Professional Cabling & Security Solutions</h1>
+                <p>Structured cabling, security cameras, access control, and multimedia installations for businesses. Quality work, fair prices.</p>
+                <div class="hero-buttons">
+                    <a href="#contact" class="btn btn-primary">Get a Free Quote</a>
+                    <a href="#services" class="btn btn-outline">Our Services</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="hero-services">
+                    <div class="hero-service-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h16"/><path d="M4 15h16"/><path d="M10 3 8 21"/><path d="M16 3l-2 18"/></svg>
+                        <span>Structured Cabling</span>
+                    </div>
+                    <div class="hero-service-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg>
+                        <span>Fiber Installation & Testing</span>
+                    </div>
+                    <div class="hero-service-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>
+                        <span>Security Cameras</span>
+                    </div>
+                    <div class="hero-service-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                        <span>Door Access Control</span>
+                    </div>
+                    <div class="hero-service-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                        <span>Multimedia Systems</span>
+                    </div>
+                    <div class="hero-service-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                        <span>Phone Systems</span>
+                    </div>
+                    <div class="hero-service-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+                        <span>Certified Testing</span>
+                    </div>
+                    <div class="hero-service-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                        <span>Service & Repairs</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="services" id="services">
+        <div class="section-header">
+            <h2>Our Services</h2>
+            <p>Complete infrastructure solutions for your business</p>
+        </div>
+        <div class="services-grid">
+            <div class="service-card">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 9h16"/>
+                    <path d="M4 15h16"/>
+                    <path d="M10 3 8 21"/>
+                    <path d="M16 3l-2 18"/>
+                </svg>
+                <h3>Structured Cabling</h3>
+                <p>Cat5e, Cat6, Cat6a copper installations. Clean, organized runs with proper labeling and documentation.</p>
+            </div>
+            <div class="service-card">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"/>
+                    <circle cx="12" cy="12" r="3"/>
+                </svg>
+                <h3>Fiber Optic Installation</h3>
+                <p>Single-mode and multi-mode fiber installation, termination, and splicing. Complete end-to-end fiber solutions.</p>
+            </div>
+            <div class="service-card">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M9 11l3 3L22 4"/>
+                    <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+                </svg>
+                <h3>Certified Testing</h3>
+                <p>Certified copper and fiber testing with full documentation. We provide test results that meet industry standards.</p>
+            </div>
+            <div class="service-card">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/>
+                    <circle cx="12" cy="13" r="3"/>
+                </svg>
+                <h3>Security Cameras</h3>
+                <p>IP and analog camera systems with remote viewing capabilities. We handle everything from small offices to large facilities.</p>
+            </div>
+            <div class="service-card">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                </svg>
+                <h3>Door Access Control</h3>
+                <p>Paxton certified installer. Keycard, fob, and biometric entry systems to secure your building.</p>
+            </div>
+            <div class="service-card">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                    <line x1="8" y1="21" x2="16" y2="21"/>
+                    <line x1="12" y1="17" x2="12" y2="21"/>
+                </svg>
+                <h3>Multimedia Installation</h3>
+                <p>Conference rooms, digital signage, and audio/video systems. Get your presentations and displays working right.</p>
+            </div>
+            <div class="service-card">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                </svg>
+                <h3>Phone Systems</h3>
+                <p>VoIP and traditional phone system installation and configuration. Keep your business communications running smoothly.</p>
+            </div>
+            <div class="service-card">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+                </svg>
+                <h3>Service & Support</h3>
+                <p>Troubleshooting, maintenance, and upgrades for existing systems. We're here when something needs fixing.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="about" id="about">
+        <div class="about-content">
+            <div>
+                <h2>Why Work With Us</h2>
+                <p>TNT Connections provides reliable infrastructure solutions for businesses of all sizes. We focus on doing the job right the first time, with clean installations and fair pricing.</p>
+                <p>Whether you need a few cable drops or a complete building buildout, we bring the same attention to detail to every project.</p>
+                <ul class="about-list">
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                        Licensed & Insured
+                    </li>
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                        Paxton Certified Partner
+                    </li>
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                        Free Estimates
+                    </li>
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                        Work Guaranteed
+                    </li>
+                </ul>
+            </div>
+            <div class="about-highlights">
+                <div class="highlight-box">
+                    <strong>Local</strong>
+                    <span>Business</span>
+                </div>
+                <div class="highlight-box">
+                    <strong>All</strong>
+                    <span>Business Sizes</span>
+                </div>
+                <div class="highlight-box">
+                    <strong>Fast</strong>
+                    <span>Response Time</span>
+                </div>
+                <div class="highlight-box">
+                    <strong>Quality</strong>
+                    <span>Workmanship</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <div class="contact-content">
+            <div class="contact-info">
+                <h2>Get In Touch</h2>
+                <p>Need a quote or have questions? Give us a call or fill out the form. We'll get back to you quickly.</p>
+                
+                <div class="contact-method">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                    </svg>
+                    <div>
+                        <strong>Phone</strong>
+                        <a href="tel:+15551234567">(555) 123-4567</a>
+                    </div>
+                </div>
+
+                <div class="contact-method">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                        <polyline points="22,6 12,13 2,6"/>
+                    </svg>
+                    <div>
+                        <strong>Email</strong>
+                        <a href="mailto:info@ineedtnt.com">info@ineedtnt.com</a>
+                    </div>
+                </div>
+
+                <div class="contact-method">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                        <circle cx="12" cy="10" r="3"/>
+                    </svg>
+                    <div>
+                        <strong>Service Area</strong>
+                        <span>Local & Regional</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-form">
+                <h3>Request a Quote</h3>
+                <form onsubmit="handleSubmit(event)">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone</label>
+                            <input type="tel" id="phone" name="phone">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="service">Service Needed</label>
+                        <select id="service" name="service">
+                            <option value="">Select...</option>
+                            <option value="cabling">Structured Cabling</option>
+                            <option value="fiber">Fiber Installation</option>
+                            <option value="testing">Certified Testing</option>
+                            <option value="cameras">Security Cameras</option>
+                            <option value="access">Door Access Control</option>
+                            <option value="multimedia">Multimedia Installation</option>
+                            <option value="phone">Phone Systems</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Project Details</label>
+                        <textarea id="message" name="message"></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="logo.png" alt="TNT Connections" class="footer-logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-flex';">
+                <div class="footer-fallback" style="display:none;">
+                    <div class="logo-box">TNT</div>
+                    <span>TNT Connections</span>
+                </div>
+            </div>
+            <p>&copy; 2025 TNT Connections. Telecom Networking Technologies. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            document.getElementById('mobileMenu').classList.toggle('active');
+        }
+
+        function handleSubmit(event) {
+            event.preventDefault();
+            alert('Thank you! We\'ll be in touch soon.');
+            event.target.reset();
+        }
+    </script>
+</body>
+</html>
