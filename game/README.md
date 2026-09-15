@@ -33,6 +33,16 @@ Play it at `/game/` on the site, or open `game/index.html` locally.
 - **Click** a structure to inspect, then **U** upgrade / **X** sell
 - **R** repair all · **C** call the next wave early for bonus scrap · **Space** pause
 
+## Running it locally
+
+Open `index.html` directly in a browser and it works. Saving uses `localStorage`,
+which some browsers refuse on `file://` URLs — if progress does not stick, serve the
+folder over HTTP instead:
+
+```sh
+python3 -m http.server 8000     # then open http://localhost:8000/
+```
+
 ## Files
 
 ```
